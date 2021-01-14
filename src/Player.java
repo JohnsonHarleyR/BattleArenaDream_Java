@@ -1,7 +1,8 @@
 // this holds the player information
 public class Player {
-	int stamina = 10; // starts at 10, it it reaches 0 the user dies
-	int panic = 10; // starts at 10, if it reaches 20 the user dies
+	
+	private int stamina = 10; // starts at 10, it it reaches 0 the user dies
+	private int panic = 10; // starts at 10, if it reaches 20 the user dies
 	
 	
 	// regular methods
@@ -21,8 +22,13 @@ public class Player {
 	}
 	
 	public void setStamina(int stamina) {
-		//System.out.println("Player stamina: " + stamina); // test
-		this.stamina = stamina;
+		// if it's less than 0, set it to 0
+		// otherwise leave it as it is
+		if (stamina < 0) {
+			this.stamina = 0;
+		} else {
+			this.stamina = stamina;
+		}
 		
 	}
 	
@@ -31,6 +37,15 @@ public class Player {
 	}
 	
 	public void setPanic(int panic) {
-		this.panic = panic;
+		// if it's greater than 20, set it to 20
+		// or if it's less than 0, set it to 0
+		// otherwise leave it as it is
+		if (panic > 20) {
+			this.panic = 20;
+		} else if (panic < 0) {
+			this.panic = 0;
+		} else {
+			this.panic = panic;
+		}
 	}
 }

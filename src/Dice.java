@@ -1,11 +1,11 @@
-import java.util.Scanner;
+//import java.util.Scanner;
 
 //You roll the dice to play the game
 public class Dice {
 	
 	// variables
-	Scanner scan = new Scanner(System.in);
-	int diceRoll = 0; // if the game says 0, that indicates an error
+	//Scanner scan = new Scanner(System.in);
+	private int diceRoll = 0; // if the game says 0, that indicates an error
 	
 	// methods
 	
@@ -17,6 +17,7 @@ public class Dice {
 		*/
 		diceRoll = (int) (Math.random() * 6) + 1;
 		System.out.println("You roll a " + diceRoll + "!\n");
+		
 	}
 	
 	// getters and setters

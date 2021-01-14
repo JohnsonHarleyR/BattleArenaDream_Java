@@ -21,13 +21,22 @@ public class BattleArenaDream {
 			Player player = new Player(); // the user/player
 			Enemy enemy = new Enemy(); // the enemy the user is fighting
 			Dice dice = new Dice(); // the dice to roll
+			String death = "\nYou ran out of stamina."; // this is the default unless panic increases to 20
 			
 			System.out.println("You are trapped in a dream!");
 			
 			
 			// this loop will go as long as user has not died and they are not out of turns
-			while (turns > 0 && player.isAlive() == true) {
-				methods.showStats(player, enemy); // show player stats
+			while (player.isAlive() == true) {
+				methods.showStats(player, enemy, turns); // show player stats
+				
+				// see if enemy has been defeated, replace it with a new one if it's dead
+				// putting it here so that the player can see the enemy HP go to 0
+				if (!enemy.isAlive()) {
+					System.out.println("\nThe enemy is defeated!\nAnother one takes its place." +
+							"\n...Will it ever end?");
+					enemy = new Enemy();
+				}
 				
 				// put a pause so the player can read what's happening
 				System.out.println("\n(Hit enter to roll the dice.)");
@@ -39,17 +48,32 @@ public class BattleArenaDream {
 				// check the outcome
 				methods.getOutcome(player, enemy, dice, scan);
 				
-				// see if enemy has been defeated
+				// subtract from turns
+				turns --;
+				
+				// check if they ran out of turns, if so set the panic to 20
+				if (turns <= 0) {
+					player.setPanic(20);
+					System.out.println("\nYou are out of turns, so your panic increases to 20!");
+					death = "\nYour panic level is too high.";
+				}
+				
 				
 			}
 			
+			methods.showStats(player, enemy, turns); // show player stats
+			
 			// once the user has died, tell the player they have died and to start everything over
+			System.out.println(death); // tells them the cause of death
 			System.out.println("You have died! The dream is starting all over again.");
 			System.out.println("Will it ever end...?\n");
 			
+			System.out.println("\n(Hit enter to continue.)");
+			scan.nextLine();
+			
+			//scan.close();
 			
 		}
-		
 
 	}
 	

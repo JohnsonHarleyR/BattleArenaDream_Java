@@ -3,13 +3,16 @@ import java.util.Scanner;
 public class GameMethods {
 
 	// show player stats
-	public void showStats(Player player, Enemy enemy) {
+	public void showStats(Player player, Enemy enemy, int turns) {
 		System.out.println("\n*Stats*");
 		System.out.println("Stamina: " + player.getStamina());
 		System.out.println("Panic level: " + player.getPanic());
 		System.out.println("Enemy HP: " + enemy.getHp());
+		System.out.println("Turns left: " + turns);
 	}
 	
+	
+	// get the outcome of a dice roll
 	public void getOutcome(Player player, Enemy enemy, Dice dice, Scanner scan) {
 		// determine the outcome by what the player rolled
 		int diceRoll = dice.getDiceRoll();
@@ -22,6 +25,7 @@ public class GameMethods {
 			System.out.println("You dodge the attack!\nStill, you hurt yourself so your stamina " +
 					"decreases by 1.");
 			player.setStamina(player.getStamina() - 1);
+			//player.setStamina(player.getStamina() - 15); // to test what happens when they run out of stamina
 			break;
 		case 3:
 			System.out.println("You deflect the attack!\nNothing happens.");
