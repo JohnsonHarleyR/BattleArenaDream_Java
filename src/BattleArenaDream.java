@@ -6,6 +6,7 @@ public class BattleArenaDream {
 		
 		// variables
 		GameMethods methods = new GameMethods();
+		Scanner scan = new Scanner(System.in);
 		
 		// Intro title
 		System.out.println("***BATTLE ARENA DREAM***\n");
@@ -16,13 +17,11 @@ public class BattleArenaDream {
 			// start a new round
 			
 			// set variables for this round
-			Scanner scan = new Scanner(System.in);
 			int turns = 10; // round continues as long as there are turns left
 			Player player = new Player(); // the user/player
 			Enemy enemy = new Enemy(); // the enemy the user is fighting
 			Dice dice = new Dice(); // the dice to roll
 			String death = "\nYou ran out of stamina."; // this is the default unless panic increases to 20
-			String test = "";
 			
 			System.out.println("You are trapped in a dream!");
 			
@@ -41,7 +40,7 @@ public class BattleArenaDream {
 				
 				// put a pause so the player can read what's happening
 				System.out.println("\n(Hit enter to roll the dice.)");
-				test = scan.nextLine();
+				scan.nextLine();
 				
 				// roll the dice
 				dice.rollDice();
@@ -72,13 +71,10 @@ public class BattleArenaDream {
 			System.out.println("\n(Hit enter to continue.)");
 			scan.nextLine();
 			
-			scan.close();
-			
 		}
-
 	}
 	
-	
+	// unable to close the scanner without running into other exceptions
 	
 
 }
