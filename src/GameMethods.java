@@ -13,7 +13,7 @@ public class GameMethods {
 	
 	
 	// get the outcome of a dice roll
-	public void getOutcome(Player player, Enemy enemy, Dice dice, Scanner scan) {
+	public void getOutcome(Player player, Enemy enemy, Dice dice) {
 		// determine the outcome by what the player rolled
 		int diceRoll = dice.getDiceRoll();
 		switch (diceRoll) {
@@ -50,9 +50,6 @@ public class GameMethods {
 		default:
 			System.out.println("ERROR - not a number 1 through 6");
 		}
-		/*
-		System.out.println("\n(Hit enter to continue.)");
-		scan.nextLine();
-		*/
+
 	}
 }
