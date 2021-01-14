@@ -16,8 +16,6 @@ public class Dice {
 		scan.nextLine();
 		*/
 		diceRoll = (int) (Math.random() * 6) + 1;
-		System.out.println("You roll a " + diceRoll + "!\n");
-		
 	}
 	
 	// getters and setters
