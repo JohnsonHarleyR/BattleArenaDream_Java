@@ -52,7 +52,7 @@ public class BattleArenaDream {
 				turns --;
 				
 				// check if they ran out of turns, if so set the panic to 20
-				if (turns <= 0) {
+				if (turns <= 0 && player.getStamina() != 0) {
 					player.setPanic(20);
 					System.out.println("\nYou are out of turns, so your panic increases to 20!");
 					death = "\nYour panic level is too high.";
