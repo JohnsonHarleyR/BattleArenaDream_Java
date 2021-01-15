@@ -122,7 +122,7 @@ public class BattleArenaDream {
 			// once the user has died, tell the player they have died and to start everything over
 			System.out.println(death); // tells them the cause of death
 			System.out.println("Suddenly, the grim reaper appears to bring you back to life.");
-			System.out.println(endings[(int)(Math.random() * endings.length + 1)] + "\n");
+			System.out.println("\n" + endings[(int)(Math.random() * endings.length)]);
 			//System.out.println("Will it ever end...?\n");
 			
 			System.out.println("\n(Hit enter to continue.)");
