@@ -4,14 +4,65 @@ public class BattleArenaDream {
 
 	public static void main(String[] args) {
 		
+		// Variables
+		Scanner scan = new Scanner(System.in);
+		String[] diceFront = new String[] { // To get the circles lined perfectly, they would be too large.
+				" _________ \n"				// This is good for now. (Java didn't want to accept an overline char.)
+			  + "|         |\n"
+			  + "|         |\n"
+			  + "|    O    |\n"
+			  + "|         |\n"
+			  + "|_________|",
+			  			" _________ \n"
+					  + "|         |\n"
+					  + "| O       |\n"
+					  + "|         |\n"
+					  + "|       O |\n"
+					  + "|_________|",
+					            " _________ \n"
+							  + "|         |\n"
+							  + "| O       |\n"
+							  + "|    O    |\n"
+							  + "|       O |\n"
+							  + "|_________|",
+							  			" _________ \n"
+									  + "|         |\n"
+									  + "| O     O |\n"
+									  + "|         |\n"
+									  + "| O     O |\n"
+									  + "|_________|",
+									  			" _________ \n"
+											  + "|         |\n"
+											  + "| O     O |\n"
+											  + "|    O    |\n"
+											  + "| O     O |\n"
+											  + "|_________|",
+											  			" _________ \n"
+													  + "|         |\n"
+													  + "| O     O |\n"
+													  + "| O     O |\n"
+													  + "| O     O |\n"
+													  + "|_________|",
+		};
+		String[] endings = new String[] {"...Will this ever end?", "Is this what life has become?",
+				"You wonder what your purpose even is.", "Are you being brough back just to die?",
+				"If this is a dream, it's more like a nightmare.", "Does he expect you to do this all on your own?",
+				"If he has so much power, why are you the one fighting?"};
 		
 		// Intro title
-		System.out.println("***BATTLE ARENA DREAM***\n");
+		System.out.println(" __       ___ ___       ___          __   ___           \r\n" + 
+				"|__)  /\\   |   |  |    |__      /\\  |__) |__  |\\ |  /\\  \r\n" + 
+				"|__) /~~\\  |   |  |___ |___    /~~\\ |  \\ |___ | \\| /~~\\ \n");
+		
+		System.out.println("You open your eyes to see a sword in your hands. You hear cheering.");
+		System.out.println("How strange, you look around to see you are standing in an arena with no crowd.");
+		System.out.println("\nIs this real life or a dream?");
+		
+		//System.out.println(diceFront[0]);// test
 		
 		// The dream runs an infinite loop so the user must close the app in order to exit.
 		while (true) {
 			
-			Scanner scan = new Scanner(System.in);
 			
 			// start a new round
 			
@@ -20,9 +71,8 @@ public class BattleArenaDream {
 			Player player = new Player(); // the user/player
 			Enemy enemy = new Enemy(); // the enemy the user is fighting
 			Dice dice = new Dice(); // the dice to roll
-			String death = "\nYou ran out of stamina."; // this is the default unless panic increases to 20
+			String death = "\nYou have been killed!"; // this is the default unless panic increases to 20
 			
-			System.out.println("You are trapped in a dream!");
 			
 			
 			// this loop will go as long as user has not died and they are not out of turns
@@ -38,13 +88,18 @@ public class BattleArenaDream {
 				}
 				
 				// put a pause so the player can read what's happening
-				System.out.println("\n(Hit enter to roll the dice.)");
+				if (turns == 10) {
+					System.out.println("\nAn angry goblin stands before you.\n(Hit enter to attack.)"); // only show this on first turn
+				} else {
+					System.out.println("\n(Hit enter to attack.)");
+				}
 				scan.nextLine();
 				
 				// roll the dice
 				dice.rollDice();
 				// display the result
-				System.out.println("You roll a " + dice.getDiceRoll() + "!\n");
+				System.out.println(diceFront[dice.getDiceRoll() - 1] + "\n");
+				//System.out.println("You roll a " + dice.getDiceRoll() + "!\n");
 				
 				// check the outcome
 				getOutcome(player, enemy, dice);
@@ -55,8 +110,8 @@ public class BattleArenaDream {
 				// check if they ran out of turns, if so set the panic to 20
 				if (turns <= 0 && player.getStamina() != 0) {
 					player.setPanic(20);
-					System.out.println("\nYou are out of turns, so your panic increases to 20!");
-					death = "\nYour panic level is too high.";
+					System.out.println("\nThis has gone on too long, your panic increases to 20!");
+					death = "\nYou die of a heart attack!";
 				}
 				
 				
@@ -66,28 +121,28 @@ public class BattleArenaDream {
 			
 			// once the user has died, tell the player they have died and to start everything over
 			System.out.println(death); // tells them the cause of death
-			System.out.println("You have died! The dream is starting all over again.");
-			System.out.println("Will it ever end...?\n");
+			System.out.println("Suddenly, the grim reaper appears to bring you back to life.");
+			System.out.println(endings[(int)(Math.random() * endings.length + 1)] + "\n");
+			//System.out.println("Will it ever end...?\n");
 			
 			System.out.println("\n(Hit enter to continue.)");
 			scan.nextLine();
 			
 			
-			scan.close();
+			//scan.close(); // still causes errors if I close the scanner during the loop
 		}
 		
 	}
 	
-	// unable to close the scanner without running into other exceptions
-	
 	
 	// show player stats
 	public static void showStats(Player player, Enemy enemy, int turns) {
-		System.out.println("\n*Stats*");
+		System.out.println("\n*Your "
+				+ "Stats*");
 		System.out.println("Stamina: " + player.getStamina());
 		System.out.println("Panic level: " + player.getPanic());
 		System.out.println("Enemy HP: " + enemy.getHp());
-		System.out.println("\nYou have " + turns + " turns left.");
+		//System.out.println("\nYou have " + turns + " turns left.");
 	}
 		
 		
