@@ -44,17 +44,24 @@ public class BattleArenaDream {
 													  + "| O     O |\n"
 													  + "|_________|",
 		};
-		String[] endings = new String[] {"...Will this ever end?", "Is this what life has become?",
-				"You wonder what your purpose is in this life.", "Why be brought back just to die?",
+		String[] endings = new String[] {"...Will this ever end?", "Is fighting your purpose in life?",
+				"An existential crisis sets in as you wonder why this won't end.", 
+				"Why does he bring you back to die again?\nYou're getting too deep so you shake yourself out of it.",
 				"If this is a dream, it's more like a nightmare.", "Does he expect you to do this all on your own?",
-				"If he has so much power, why are you the one fighting?"};
+				"If he has so much power, why are you the one fighting?",
+				"You ask, \"Hey, could I get some help?\" The grim reaper shakes his head.", 
+				"How many enemies must you defeat? How many lives must you live?",
+				"You wonder if you'll get a prize at some point.",
+				"You tell him that you're more of a philosopher than a fighter, but the grim reaper shrugs.",
+				"\"What happens if I refuse to kill more?\", you ask."
+				+ "\n\"You die,\" he replies. \"Oh...\" You let out a sigh."};
 		
 		// Intro title
 		System.out.println(" __       ___ ___       ___          __   ___           \r\n" + 
 				"|__)  /\\   |   |  |    |__      /\\  |__) |__  |\\ |  /\\  \r\n" + 
 				"|__) /~~\\  |   |  |___ |___    /~~\\ |  \\ |___ | \\| /~~\\ \n");
 		
-		System.out.println("You open your eyes to see a sword in your hands. You hear cheering.");
+		System.out.println("You open your eyes to see a sword in one hand and a shield in the other. You hear cheering.");
 		System.out.println("How strange, you look around to see you are standing in an arena with no crowd.");
 		System.out.println("\nIs this real life or a dream?");
 		
@@ -82,16 +89,17 @@ public class BattleArenaDream {
 				// see if enemy has been defeated, replace it with a new one if it's dead
 				// putting it here so that the player can see the enemy HP go to 0
 				if (!enemy.isAlive()) {
-					System.out.println("\nThe enemy is defeated!\nAnother one takes its place." +
-							"\n...Will it ever end?");
+					System.out.println("\nThe enemy falls to its death!\nA gate rumbles opens to reveal another menacing goblin." +
+							"\n...How many must you kill before this ends?");
 					enemy = new Enemy();
 				}
 				
 				// put a pause so the player can read what's happening
-				if (turns == 10) {
-					System.out.println("\nAn angry goblin stands before you.\n(Hit enter to attack.)"); // only show this on first turn
+				if (turns == 10) { 
+					// only show this on first turn
+					System.out.println("\nAn angry goblin in armor stands before you.\n(Hit enter to roll for an attack.)"); 
 				} else {
-					System.out.println("\n(Hit enter to attack.)");
+					System.out.println("\nYou have " + turns + " turns left.\n(Hit enter to roll for an attack.)");
 				}
 				scan.nextLine();
 				
@@ -110,8 +118,8 @@ public class BattleArenaDream {
 				// check if they ran out of turns, if so set the panic to 20
 				if (turns <= 0 && player.getStamina() != 0) {
 					player.setPanic(20);
-					System.out.println("\nThis has gone on too long, your panic increases to 20!");
-					death = "\nYou die of a heart attack!";
+					System.out.println("\nThis has gone on too long! Your panic increases to 20!");
+					death = "\nYou die of a heart attack! Where's the doctor?";
 				}
 				
 				
@@ -128,6 +136,8 @@ public class BattleArenaDream {
 			System.out.println("\n(Hit enter to continue.)");
 			scan.nextLine();
 			
+			System.out.println("You must fight!");
+			
 			
 			//scan.close(); // still causes errors if I close the scanner during the loop
 		}
@@ -137,8 +147,11 @@ public class BattleArenaDream {
 	
 	// show player stats
 	public static void showStats(Player player, Enemy enemy, int turns) {
-		System.out.println("\n*Your "
-				+ "Stats*");
+		if (turns == 10) {
+			System.out.println("\n*Your Stats*"); // only on first turn
+		} else {
+			System.out.println("\n*New Stats*");
+		}
 		System.out.println("Stamina: " + player.getStamina());
 		System.out.println("Panic level: " + player.getPanic());
 		System.out.println("Enemy HP: " + enemy.getHp());
@@ -152,30 +165,31 @@ public class BattleArenaDream {
 		int diceRoll = dice.getDiceRoll();
 		switch (diceRoll) {
 		case 1:
-			System.out.println("You're hit!\nYour panic increases by 2.");
+			System.out.println("The enemy smirks as he taunts you. He seeks to intimidate."
+					+ "\nIt works. Your panic increases by 2.");
 			player.setPanic(player.getPanic() + 2);
 			break;
 		case 2:
-			System.out.println("You dodge the attack!\nStill, you hurt yourself so your stamina " +
+			System.out.println("The enemy attacks! You dodge, but he strikes anyway!\nYour stamina " +
 					"decreases by 1.");
 			player.setStamina(player.getStamina() - 1);
 			//player.setStamina(player.getStamina() - 15); // to test what happens when they run out of stamina
 			break;
 		case 3:
-			System.out.println("You deflect the attack!\nNothing happens.");
+			System.out.println("The enemy strikes, but you block the attack!\nNothing else happens.");
 			break;
 		case 4:
-			System.out.println("The enemy backs away!\nYour stamina increases by 1.");
+			System.out.println("You let out a beastly growl. The enemy backs away!\nYour stamina increases by 1.");
 			player.setStamina(player.getStamina() + 1);
 			break;
 		case 5:
-			System.out.println("The enemy dodges, but you strike a glancing blow!" +
+			System.out.println("You swing your sword. The enemy dodges, but you strike anyway!" +
 					"\nYour panic reduces by 1. The enemy loses 3 hit points.");
 			player.setPanic(player.getPanic() - 1);
 			enemy.setHp(enemy.getHp() - 3);
 			break;
 		case 6:
-			System.out.println("*WHACK* The enemy takes significant damage!" +
+			System.out.println("*THWACK* You swing fast to strike a critical blow with your sword!" +
 					"\nYour panic reduces by 3. Your stamina increases by 2. The enemy loses 5 hit points.");
 			player.setPanic(player.getPanic() - 3);
 			player.setStamina(player.getStamina() + 2);
