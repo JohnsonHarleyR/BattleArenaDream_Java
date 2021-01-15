@@ -45,7 +45,7 @@ public class BattleArenaDream {
 													  + "|_________|",
 		};
 		String[] endings = new String[] {"...Will this ever end?", "Is this what life has become?",
-				"You wonder what your purpose even is.", "Are you being brough back just to die?",
+				"You wonder what your purpose is in this life.", "Why be brought back just to die?",
 				"If this is a dream, it's more like a nightmare.", "Does he expect you to do this all on your own?",
 				"If he has so much power, why are you the one fighting?"};
 		
