@@ -37,12 +37,13 @@ public class Player {
 	}
 	
 	public void setPanic(int panic) {
-		// if it's greater than 20, set it to 20
+		// if it's greater than 20, set it to 20 - (not necessary, actually)
 		// or if it's less than 0, set it to 0
 		// otherwise leave it as it is
-		if (panic > 20) {
+		/*if (panic > 20) {
 			this.panic = 20;
-		} else if (panic < 0) {
+		} else */ 
+		if (panic < 0) {
 			this.panic = 0;
 		} else {
 			this.panic = panic;
